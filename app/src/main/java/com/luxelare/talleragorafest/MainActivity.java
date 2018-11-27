@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         .build();
 
         ForecastClient.create(configuration);
-
+        ObtenerClima();
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -55,14 +56,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void ObtenerClima() {
         ForecastClient.getInstance()
-                .getForecast(lat, lng, new Callback<Forecast>() {
+                .getForecast(25.790466, -108.985886, new Callback<Forecast>() {
                     @Override
                     public void onResponse(Call<Forecast> forecastCall, Response<Forecast> response) {
                         if (response.isSuccessful()) {
                             Forecast forecast = response.body();
-                            lisaclima   = Utils.pronosticoPorHoras(forecast,getApplicationContext());
+                            Log.d("_____clima______", "onResponse: "+forecast);
+                            /*lisaclima   = Utils.pronosticoPorHoras(forecast,getApplicationContext());
                             AdaptadorClima adaptadorClima = new AdaptadorClima(getApplicationContext(), lisaclima);
-                            lv.setAdapter(adaptadorClima);
+                            lv.setAdapter(adaptadorClima);*/
                         }
                     }
                     @Override
