@@ -127,11 +127,11 @@ public class MyHeaderRecyclerAdapter extends  RecyclerView.Adapter<RecyclerView.
 
         public VHItem(View itemView) {
             super(itemView);
-            this.fecha = (TextView)itemView.findViewById(R.id.txtHora);
+          /*  this.fecha = (TextView)itemView.findViewById(R.id.txtHora);
             this.icono = (TextView)itemView.findViewById(R.id.txtFecha);
             this.temperatura = (TextView)itemView.findViewById(R.id.txtDato1);
             this.pronostico = (TextView)itemView.findViewById(R.id.txtDato2);
-            this.probabLluvia = (TextView)itemView.findViewById(R.id.txtDato3);
+            this.probabLluvia = (TextView)itemView.findViewById(R.id.txtDato3);*/
 
             
         }

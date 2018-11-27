@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<Forecast> forecastCall, Response<Forecast> response) {
                         if (response.isSuccessful()) {
                             Forecast forecast = response.body();
+                            Toast.makeText(MainActivity.this, "forecast"+forecast.getDaily().getSummary(), Toast.LENGTH_SHORT).show();
                             Log.d("_____clima______", "onResponse: "+forecast);
                             /*lisaclima   = Utils.pronosticoPorHoras(forecast,getApplicationContext());
                             AdaptadorClima adaptadorClima = new AdaptadorClima(getApplicationContext(), lisaclima);
