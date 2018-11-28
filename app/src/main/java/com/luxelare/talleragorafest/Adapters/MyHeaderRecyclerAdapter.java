@@ -69,7 +69,7 @@ public class MyHeaderRecyclerAdapter extends  RecyclerView.Adapter<RecyclerView.
             VHheader.VelViento.setText(header.getVelViento());
             VHheader.Humedad.setText(header.getHumedad());
 
-            /*if (header.getIcono().equals("clear-day")){
+            if(header.getIcono().equals("clear-day")){
                 Drawable img = context.getResources().getDrawable( R.drawable.clearday);
                 img.setBounds( 0, 0, 60, 60 );
                 VHheader.Pronostico.setCompoundDrawables( img, null, null, null );
@@ -110,7 +110,7 @@ public class MyHeaderRecyclerAdapter extends  RecyclerView.Adapter<RecyclerView.
                 img.setBounds( 0, 0, 60, 60 );
                 VHheader.Pronostico.setCompoundDrawables( img, null, null, null );
             }
-            */
+
 
 
         }

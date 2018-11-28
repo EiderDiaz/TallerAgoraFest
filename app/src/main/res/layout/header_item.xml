@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@drawable/layout_bg"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -46,6 +47,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginBottom="10dp"
         android:weightSum="3"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -53,7 +55,7 @@
         <TextView
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/ic_adb_black_24dp"
+            android:drawableLeft="@drawable/umbrella"
             android:drawablePadding="5dp"
             android:id="@+id/txtProbabLluvia"
             android:text="25%"
@@ -67,7 +69,7 @@
         <TextView
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:drawableStart="@drawable/ic_adb_black_24dp"
+            android:drawableStart="@drawable/wind_tiny"
             android:drawablePadding="5dp"
             android:id="@+id/txtVelViento"
             android:text="15km/h"
@@ -80,7 +82,7 @@
         <TextView
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:drawableStart="@drawable/ic_adb_black_24dp"
+            android:drawableStart="@drawable/humidity"
             android:drawablePadding="5dp"
             android:id="@+id/txtHumedad"
             android:text="25%"
