@@ -1,5 +1,6 @@
 package com.luxelare.talleragorafest;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.zetterstrom.com.forecast.ForecastClient;
 import android.zetterstrom.com.forecast.ForecastConfiguration;
@@ -46,17 +48,17 @@ public class MainActivity extends AppCompatActivity {
                         .build();
 
         ForecastClient.create(configuration);
-        ObtenerClima();
+        ObtenerClima(25.790466,-108.985886);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 Intent i = new Intent(getApplicationContext(), MapsActivity.class);
-                startActivity(i);
+                //startActivity(i);
+                startActivityForResult(i,1);
+
 
 
 
@@ -65,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void ObtenerClima() {
+    public void ObtenerClima(double lat,double lng) {
         ForecastClient.getInstance()
-                .getForecast(25.790466, -108.985886, new Callback<Forecast>() {
+                .getForecast(lat, lng, new Callback<Forecast>() {
                     @Override
                     public void onResponse(Call<Forecast> forecastCall, Response<Forecast> response) {
                         if (response.isSuccessful()) {
@@ -87,6 +89,31 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String latitud=data.getStringExtra("lat");
+                String longitud=data.getStringExtra("lng");
+                double lat = Utils.cadenaToDobleyCuatroDecimales(latitud,getApplicationContext());
+                double lng = Utils.cadenaToDobleyCuatroDecimales(longitud,getApplicationContext());
+                ObtenerClima(lat,lng);
+
+
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }
+
+
+
+
 
 
 

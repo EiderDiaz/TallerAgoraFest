@@ -1,6 +1,10 @@
 package com.luxelare.talleragorafest;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -10,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -95,13 +100,63 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         new LatLng(latLng.latitude, latLng.longitude)).title("nuevo marcador");
                 mMap.addMarker(marker);
                 Toast.makeText(getApplicationContext(), "LATITUD :"+latLng.latitude+", LONGITUD :"+latLng.longitude, Toast.LENGTH_SHORT).show();
-                //showChangeLangDialog(String.valueOf(latLng.latitude),String.valueOf(latLng.longitude),cityName);
+                MostrarDialogoUbicacion(String.valueOf(latLng.latitude),String.valueOf(latLng.longitude));
 
             }
         });
 
     }
 
+
+    public void MostrarDialogoUbicacion(final String lat,final  String lng) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        dialogBuilder.setTitle("Selecciona Ubicación");
+        dialogBuilder.setMessage("Estas seguro que quieres obtener el clima de esta ubicación ?");
+        dialogBuilder.setPositiveButton("Si, quiero esta ubicación", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("lat",lat);
+                returnIntent.putExtra("lng",lng);
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
+            }
+        });
+        dialogBuilder.setNegativeButton("No, quiero otra ubicación", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mMap.clear();
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        //final View dialogView = inflater.inflate(R.layout.custom_dialog, null);
+        //dialogBuilder.setView(dialogView);
+        //final EditText edt = (EditText) dialogView.findViewById(R.id.edit1);
+        dialogBuilder.setTitle("Aviso");
+        dialogBuilder.setMessage("Estas seguro que quieres salir de la seleccion de ubicacion?");
+        dialogBuilder.setPositiveButton("Si, quiero salir ", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Intent returnIntent = new Intent();
+                setResult(Activity.RESULT_CANCELED, returnIntent);
+                finish();
+            }
+        });
+        dialogBuilder.setNegativeButton("No, quiero seguir en este menu", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+
+    }
 
 
 }
