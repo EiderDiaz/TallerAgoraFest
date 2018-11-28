@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
-
         <LinearLayout
             android:weightSum="4"
             android:orientation="horizontal"
@@ -17,7 +15,7 @@
                 android:layout_weight="2"
                 android:drawableStart="@drawable/ic_adb_black_24dp"
                 android:drawablePadding="5dp"
-                android:id="@+id/txtProbabLluvia"
+                android:id="@+id/txtDiayFecha"
                 android:text="25%"
                 android:gravity="center_vertical"
                 android:textStyle="bold"
@@ -30,7 +28,7 @@
                 android:layout_weight="2"
                 android:drawableStart="@drawable/ic_adb_black_24dp"
                 android:drawablePadding="5dp"
-                android:id="@+id/txtVelViento"
+                android:id="@+id/txtTemperatura"
                 android:text="15km/h"
                 android:gravity="center_vertical"
                 android:textStyle="bold"
@@ -71,12 +69,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-
-
-
-
-
-
 
 
 </LinearLayout>

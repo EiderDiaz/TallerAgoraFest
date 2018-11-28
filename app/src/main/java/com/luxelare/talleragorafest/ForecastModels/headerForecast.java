@@ -2,7 +2,7 @@ package com.luxelare.talleragorafest.ForecastModels;
 
 
 public class headerForecast {
-    String Fecha,Pronostico,Temperatura,Icono,ProbLluvia,VelViento,Humedad;
+   private String Fecha,Pronostico,Temperatura,Icono,ProbLluvia,VelViento,Humedad;
 
     public headerForecast() {
     }

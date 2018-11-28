@@ -2,6 +2,9 @@ package com.luxelare.talleragorafest;
 
 import android.content.Context;
 import android.util.Log;
+import android.zetterstrom.com.forecast.models.DataPoint;
+import android.zetterstrom.com.forecast.models.Forecast;
+import android.zetterstrom.com.forecast.models.Icon;
 /*
 import android.zetterstrom.com.forecast.models.DataPoint;
 import android.zetterstrom.com.forecast.models.Forecast;
@@ -9,6 +12,10 @@ import android.zetterstrom.com.forecast.models.Icon;
 import android.zetterstrom.com.forecast.models.PrecipitationType;
 
 import com.example.eider.bitacoradevuelos.modelo.ClimaInfo;*/
+
+import com.luxelare.talleragorafest.ForecastModels.elementForecast;
+import com.luxelare.talleragorafest.ForecastModels.forecast;
+import com.luxelare.talleragorafest.ForecastModels.headerForecast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,74 +26,47 @@ import java.util.Arrays;
 
 public class Utils {
 
-/*
-    public static String ObtenerClimaActual(Forecast forecast) {
-
-        if (forecast != null && forecast.getCurrently() != null) {
-            ArrayList<String> currentlywheather = new ArrayList<String>();
-            currentlywheather.add(forecast.getCurrently().getSummary());
-            currentlywheather.add(forecast.getCurrently().getPrecipProbability().toString());
-            currentlywheather.add(forecast.getCurrently().getTemperature().toString());
-            currentlywheather.add(forecast.getCurrently().getHumidity().toString());
-            currentlywheather.add(forecast.getCurrently().getWindSpeed().toString());
-            currentlywheather.add(forecast.getCurrently().getCloudCover().toString());
-            String clima = Arrays.asList(currentlywheather).toString().replace("[", "");
-            clima = clima.replace("]", "");
-            String[] arrayClima = clima.split(",");
-            String estadoMeteorologico = arrayClima[0];
-            String probabilidadDePresipitacion = arrayClima[1];
-            String temperatura = arrayClima[2];
-            String humedad = arrayClima[3];
-            String velocidadDeVientos = arrayClima[4];
-            String coverturaDeNubes = arrayClima[5];
-            String climaConFormato = "estadoMeteorologico: " + estadoMeteorologico +
-                    "\n probabilidadDePresipitacion:" + probabilidadDePresipitacion +
-                    "\n temperatura:" + temperatura +
-                    "\n humedad:" + humedad +
-                    "\n velocidadDeVientos:" + velocidadDeVientos +
-                    "\n coverturaDeNubes:" + coverturaDeNubes;
-            return climaConFormato;
-
-        } else {
-            return "forecast vacio";
-        }
-
-    }
-
-    public static ArrayList<ClimaInfo> pronosticoPorHoras(Forecast forecast, Context context) {
-        ArrayList<ClimaInfo> ArraypronosticoPorHoras = new ArrayList<>();
+    public static forecast pronosticoPorHoras(Forecast JsonClima) {
+        forecast ArraypronosticoPorHoras = new forecast(); //objeto que va al adapter
+        headerForecast headerForecast = new headerForecast();// header
+        ArrayList<elementForecast> elementForecastArrayList = new ArrayList<>(); //lista de elementos forecast
 
         try {
-            if (forecast != null && forecast.getHourly() != null && forecast.getHourly().getDataPoints() != null) {
-                ArrayList<DataPoint> HourlyDataPoints = forecast.getHourly().getDataPoints();
-                for (DataPoint dataPoint : HourlyDataPoints) {
-                    String temp = dataPoint.getTime().toString();
-                    //Toast.makeText(context, "temp:"+temp, Toast.LENGTH_SHORT).show();
-                    temp = temp.substring(11, 13);
-                    Log.d("XXXXXXXX", "pronosticoPorHoras: " + temp);
-                    String fecha = dataPoint.getTime().toString().substring(0, 16);
-                    //solo toma las siguientes horas 6,9 12,15,18
-                    if (temp.equals("06") || temp.equals("09") || temp.equals("12") || temp.equals("15") || temp.equals("18")) {
-                        Icon icono = dataPoint.getIcon();
-                        String estadoMeteorologico = dataPoint.getSummary() + "/" + icono.getText();
-                        String probabilidadDePresipitacion = dataPoint.getPrecipProbability().toString();
-                        String temperatura = dataPoint.getTemperature().toString();
-                        String humedad = dataPoint.getHumidity().toString();
-                        String velocidadDeVientos = dataPoint.getWindSpeed().toString();
-                        String coverturaDeNubes = dataPoint.getCloudCover().toString();
-                        ArraypronosticoPorHoras.add(new ClimaInfo(fecha, estadoMeteorologico, probabilidadDePresipitacion, temperatura, humedad, velocidadDeVientos, coverturaDeNubes));
-                    } //condicional para obtener solo las temperaturas señaladas
+            if (JsonClima != null && JsonClima.getDaily() != null && JsonClima.getDaily().getDataPoints() != null) {
+                int contador=0;
+                ArrayList<DataPoint> dailyDataPoints = JsonClima.getDaily().getDataPoints(); //convertimos el json en datapoints para poder recorrerlo
+                for (DataPoint dataPoint : dailyDataPoints) { //recorremos los datapoints
+                    contador++;
+                    if (contador==1){ //llenar los datos del header
+                       // Log.d("pronosticoPorHoras: ","__________debuger:"+dataPoint.getWindSpeed()+"/"+dataPoint.getHumidity());
+                        headerForecast.setFecha(dataPoint.getTime().toString());
+                        headerForecast.setPronostico(dataPoint.getSummary());
+                        headerForecast.setTemperatura(dataPoint.getTemperatureMax()+"/"+dataPoint.getTemperatureMin());
+                        headerForecast.setIcono(dataPoint.getIcon().getText());
+                       headerForecast.setProbLluvia(dataPoint.getPrecipProbability().toString());
+                       headerForecast.setVelViento(dataPoint.getWindSpeed().toString());
+                        headerForecast.setHumedad(dataPoint.getHumidity().toString());
+                    }else { //llenar lista de elementos
+                        elementForecast element = new elementForecast();
+                        element.setFecha(dataPoint.getTime().toString());
+                        element.setIcono(dataPoint.getIcon().getText());
+                        element.setTemperatura(dataPoint.getTemperatureMax()+"/"+dataPoint.getTemperatureMin());
+                        element.setPronostico(dataPoint.getSummary());
+                        element.setProbabLluvia(dataPoint.getPrecipProbability().toString());
+                        elementForecastArrayList.add(element);
+                    }
+                    ArraypronosticoPorHoras.setHeader(headerForecast); //vaciar el header
+                    ArraypronosticoPorHoras.setElementosForecast(elementForecastArrayList); //vaciar los elementos
                 } //ciclo para recorrer los datapoints
             } //sin datos vacios
         } // fin de catch
 
         catch (Exception ex) {
+            Log.d("pronosticoPorHoras: ", ex.getMessage());
 
-        }
-
-
+            }
         return ArraypronosticoPorHoras;
-    } */
+    }
 
     public static Double cadenaToDobleyCuatroDecimales(String n, Context context) {
         // TODO: 10/08/2017 este metodo convierte una cadena en un double con 4 decimales jeje
