@@ -21,6 +21,8 @@ import android.zetterstrom.com.forecast.models.Forecast;
 import android.zetterstrom.com.forecast.models.Language;
 import android.zetterstrom.com.forecast.models.Unit;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.luxelare.talleragorafest.Adapters.MyHeaderRecyclerAdapter;
 import com.luxelare.talleragorafest.ForecastModels.elementForecast;
 import com.luxelare.talleragorafest.ForecastModels.forecast;
@@ -34,6 +36,16 @@ public class MainActivity extends AppCompatActivity {
     public final String DarkSkyApiKey = "9c13f3900008ece1e0cb579cd329eace";
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
+
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference mensaje_ref = ref.child("mensaje");
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         ForecastClient.create(configuration);
         ObtenerClima(25.790466,-108.985886);
 
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,10 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), MapsActivity.class);
                 //startActivity(i);
                 startActivityForResult(i,1);
-
-
-
-
+                mensaje_ref.setValue("coño micky");
             }
         });
     }

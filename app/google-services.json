@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "885179853044",
+    "firebase_url": "https://platzi-5525f.firebaseio.com",
+    "project_id": "platzi-5525f",
+    "storage_bucket": "platzi-5525f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885179853044:android:28df60d2a52e1234",
+        "android_client_info": {
+          "package_name": "com.luxelare.talleragorafest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885179853044-c7kgio6m15elocbb6sobspg44dtgnc1s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-2Zg7YGFiZrMUpa-8k6cMu8ENgdKwTAg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
