@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "885179853044-851b04opo9p8l2o1cklbj5ukqip38v8a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.luxelare.talleragorafest",
+            "certificate_hash": "a7b0da92dceff5bbd8983b4bfee2c8e7e4ef3d7e"
+          }
+        },
+        {
           "client_id": "885179853044-c7kgio6m15elocbb6sobspg44dtgnc1s.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "885179853044-c7kgio6m15elocbb6sobspg44dtgnc1s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

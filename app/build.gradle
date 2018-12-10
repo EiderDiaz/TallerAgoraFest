@@ -33,11 +33,12 @@ dependencies {
     implementation 'android.zetterstrom.com.forecast:forecast:1.2.1'
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.google.firebase:firebase-database:16.0.5'
+    implementation 'com.google.firebase:firebase-auth:16.0.5'
+    implementation 'com.google.android.gms:play-services-auth:16.0.0'
+
 
 
 }
-
-
 
 
 apply plugin: 'com.google.gms.google-services'
